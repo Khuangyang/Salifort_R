@@ -17,7 +17,7 @@ The random forest model slightly outperforms the decision tree model.
 # Modeling and Evaluation 
 Logistic Regression The logistic regression model achieved precision of 80%, recall of 83%, f1-score of 80% (all weighted averages), and accuracy of 83%, on the test set.tree model After conducting feature engineering, the decision tree model achieved AUC of 95.8%, precision of 85.7%, recall of 90.4%, f1-score of 87.9%, and accuracy of 95.8%, on the test set. The random forest modestly outperformed the decision tree model. In the random forest model,last_evaluation, tenure,number_project, overworked and salary have the highest importance. These variables are most helpful in predicting the outcome variable, left.
 
-![Feature Importance]()
+![Feature Importance](https://github.com/Khuangyang/Salifort-Motor/blob/main/salifort_rf2_importance.png)
 Horizontal bar chart showing feature importance of random forest model.
 
 # Conclusion
