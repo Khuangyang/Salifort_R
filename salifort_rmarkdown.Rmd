@@ -1,0 +1,488 @@
+---
+title: "Salifort Capstone Project"
+author: "ng khuang yang"
+date: "2024-06-21"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+The HR department at Salifort Motors wants to take some initiatives to improve employee satisfaction levels at the company. Because it is time-consuming and expensive to find, interview, and hire new employees, increasing employee retention will be beneficial to the company.
+
+Your goals in this project are to analyze the data collected by the HR department and to build a model that predicts whether or not an employee will leave the company.
+
+# Understand your dataset
+
+The dataset that you'll be using in this lab contains 15,000 rows and 10 columns for the variables listed below. 
+
+For more information about the data, refer to its source on Kaggle [link](https://www.kaggle.com/datasets/mfaisalqureshi/hr-analytics-and-job-prediction?select=HR_comma_sep.csv).
+```{r}
+# import dataset
+df <- read.csv("C:/Users/khuan/Downloads/salifort capstone/HR_capstone_dataset.csv", header = TRUE)
+```
+
+```{r}
+# display colnames
+colnames(df)
+```
+![](C:/Users/khuan/Downloads/salifort capstone/columns details.png)
+
+```{r}
+# install and activate libraries
+library(tidyverse)
+library(psych)
+library(data.table)
+library(gridExtra)
+library(ggplot2)
+library(dplyr)
+library(reshape2)
+library('fastDummies')
+library(caret)
+library(pscl)
+library(e1071)
+library(ISLR)
+library(rpart)
+library(rpart.plot)
+library(pROC)
+library(randomForest)
+library(vip)
+```
+
+
+```{r}
+# rename col names
+setnames(df,  old=c("average_montly_hours"), new=c("average_monthly_hours"))
+setnames(df,  old=c("time_spend_company"), new=c("tenure"))
+# set col to lowercase
+df <-rename_with(df,tolower)
+```
+
+```{r}
+# determine NA 
+sum(is.na(df))
+# determine duplicated
+sum(duplicated(df))
+```
+
+```{r}
+# filter out duplicated col and evaluated it
+df_duplicated <- df %>% mutate(duplicate = duplicated(df))
+df_duplicated <- df_duplicated %>% filter(duplicate=='TRUE')
+df_duplicated <- sort_by(df_duplicated, list(df_duplicated$satisfaction_level,df_duplicated$last_evaluation,df_duplicated$number_project,df_duplicated$average_monthly_hours,df_duplicated$tenure,df_duplicated$work_accident,df_duplicated$work_accident,df_duplicated$left,df_duplicated$promotion_last_5years,df_duplicated$department,df_duplicated$salary))
+```
+
+```{r}
+# show duplicated dataset
+head(df_duplicated, n = c(6, 10))
+```
+
+```{r}
+# remove duplicated
+df1 <- distinct(df)
+# confirm no duplicated
+sum(duplicated(df1))
+```
+
+```{r}
+# plot tenure boxplot
+boxplot(df1$tenure)
+```
+
+```{r}
+# determine upper & lower limit
+q1 <- quantile(df1$tenure,probs = 0.25)
+q3 <- quantile(df1$tenure,probs = 0.75)
+iqr <- q3-q1
+upper_limit <- q3+(iqr*1.5)
+lower_limit <- q1-(iqr*1.5)
+print(upper_limit)
+print(lower_limit)
+```
+
+```{r}
+# draw left table
+df_left <- table(df1$left)
+df_left <- data.frame(df_left)
+df_left <- df_left %>% mutate(percent = Freq/sum(Freq))
+df_left
+```
+
+
+# Data vitualisation
+```{r}
+# boxplot : hours vs projects (left)
+ggplot() + geom_boxplot(data= df1, mapping= aes(x=as.character(number_project), y=average_monthly_hours,fill=as.factor(left))) +
+labs(title="hours vs project", x="project", y="hours")+ scale_fill_manual('0:stayed\n1:quit', values=c('blue','pink'))
+
+```
+
+```{r}
+# barplot : projects vs left
+ggplot() + geom_bar(position='dodge',data= df1, mapping= aes(x=number_project, fill = as.factor(left)))+
+labs(title="project vs left", x="project", y="count")+scale_fill_manual('0:stayed\n1:quit', values=c('blue','pink'))
+
+```
+
+```{r}
+# scatterplot : hours vs sat_level (left)
+scatter1 <- ggplot(df1, aes(x = average_monthly_hours, y = satisfaction_level)) +
+  geom_point(aes(color = as.factor(left)),alpha=0.3)+scale_color_manual('0:stayed\n1:quit', values=c('green','red'))+
+  geom_vline(xintercept=166.67, linetype='dashed', color='blue', linewidth=2)
+scatter1
+```
+
+```{r}
+# boxplot : satis_level vs tenure (left)
+ggplot() + geom_boxplot(data= df1, mapping= aes(x=as.factor(tenure), y=satisfaction_level,fill=as.factor(left))) +
+  labs(title="S_level vs tenure", x="tenure", y="satisfy_level")+ scale_fill_manual('0:stayed\n1:quit', values=c('blue','pink'))
+
+```
+
+```{r}
+# barplot : tenure vs left
+ggplot() + geom_bar(position='dodge',data= df1, mapping= aes(x=tenure, fill = as.factor(left)))+
+  labs(title="tenure vs left", x="tenure", y="count")+scale_fill_manual('0:stayed\n1:quit', values=c('blue','pink'))
+
+```
+
+```{r}
+# scatterplot : hours vs eval (left)
+scatter2 <- ggplot(df1, aes(x = average_monthly_hours, y = last_evaluation)) +
+  geom_point(aes(color = as.factor(left)),alpha=0.3)+scale_color_manual('0:stayed\n1:quit', values=c('green','red'))+
+  geom_vline(xintercept=166.67, linetype='dashed', color='blue', linewidth=2)
+scatter2
+```
+
+```{r}
+# table : mean & median satisf_level
+table_mean_median_SLevel <- df1 %>% group_by(df1$left) %>% select(satisfaction_level) %>% summarize(mean=mean(satisfaction_level),median(satisfaction_level))
+table_mean_median_SLevel
+```
+
+```{r}
+# split tenure into 2 groups(1-5,6-10)
+salary_5 <- df1 %>% filter(tenure<=5) 
+salary_10 <- df1 %>% filter(tenure>5)
+# barplot : salary vs tenure 1-5
+ggplot() + geom_bar(position='dodge',data= salary_5, mapping= aes(x=tenure, fill = factor(salary,levels=c('low','medium','high'))))+
+  labs(title="tenure vs salary", x="tenure", y="salary")+scale_fill_manual('salary', values=c('green','orange','pink'))
+# barplot : salary vs tenure 6-10
+ggplot() + geom_bar(position='dodge',data= salary_10, mapping= aes(x=tenure, fill = factor(salary,levels=c('low','medium','high'))))+
+  labs(title="tenure vs salary", x="tenure", y="salary")+scale_fill_manual('salary', values=c('green','orange','pink'))
+
+```
+
+```{r}
+# scatterplot : hours vs promotion (left)
+ggplot(df1, aes(x = average_monthly_hours, y = promotion_last_5years)) +
+  geom_point(aes(color = as.factor(left)),alpha=0.3)+scale_color_manual('0:stayed\n1:quit', values=c('green','red'))+
+  geom_vline(xintercept=166.67, linetype='dashed', color='blue', linewidth=2,show.legend = TRUE)
+
+```
+
+```{r}
+# barplot : departments vs left
+ggplot() + geom_bar(position='dodge',data= df1, mapping= aes(x=department, fill = as.factor(left)))+
+  labs(title="department vs left", x="department", y="count")+theme(axis.text.x = element_text(angle = 90))+
+  scale_fill_manual('0:stayed\n1:quit', values=c('green','red'))
+
+```
+
+```{r}
+# heatmap
+df2 <- mutate_all(df1, function(x) as.numeric(as.factor(x)))
+heatmap(cor(df2),Rowv = NA, Colv = NA)
+
+```
+
+
+
+
+```{r}
+# creating correlation matrix
+corr_mat <- round(cor(df2),3)
+melted_corr_mat <- melt(corr_mat)
+heatmap2 <- ggplot(data = melted_corr_mat, aes(x=Var1, y=Var2, fill=value, colour = 'red')) +
+  geom_tile() + geom_text(aes(Var2, Var1, label = value), 
+            color = "red", size = 4)+theme(axis.text.x = element_text(angle = 90))
+heatmap2
+```
+
+# Building binary logistic regression
+```{r}
+# dummy variables
+df_enco <- df1
+df_enco$left <- as.numeric(df_enco$left)
+df_enco$salary <- factor(df_enco$salary,levels=c('low','medium','high'))
+df_enco$salary <- as.numeric(df_enco$salary)
+df_enco <- dummy_cols(df_enco, select_columns = c('department'),
+                      remove_selected_columns = TRUE)
+```
+
+```{r}
+# filter out departments
+df_enco_flt <- df_enco %>% select(last_evaluation,number_project,average_monthly_hours,tenure,work_accident,left,promotion_last_5years,salary)
+# plot heatmap
+cor_df2 <- round(cor(df_enco_flt),3)
+melt_df <- melt(cor_df2)
+heatmap3 <- ggplot(melt_df,aes(x = Var1, y = Var2,fill = value))+
+  geom_tile() + scale_fill_distiller(palette = "Spectral")+
+  geom_tile() +
+  labs(title = "Correlation Heatmap",
+       x = "Variable 1",
+       y = "Variable 2") + geom_text(aes(Var2, Var1, label = value), 
+                                     color = "black", size = 4)+theme(axis.text.x = element_text(angle = 90))
+heatmap3
+
+```
+
+```{r}
+# filtered out outliers
+df_logreg <- df_enco %>% filter(tenure>=1.5&tenure<=5.5)
+
+```
+
+```{r}
+set.seed(42)
+# training dataset
+indexset <- createDataPartition(df_logreg$left,p = 0.75,list = F)
+train <- df_logreg[indexset,]
+test <- df_logreg[-indexset,]
+```
+
+```{r}
+# fit logistic regression model
+model <- glm(left~., family="binomial", data=train)
+
+#disable scientific notation for model summary
+options(scipen=999)
+
+#view model summary
+model
+
+# r2
+r2 <- pR2(model)["McFadden"]
+r2
+```
+
+```{r}
+# calculate probability of default for each individual in test dataset
+predicted <- predict(model, test, type="response")
+
+predicted_test <- ifelse(predicted > 0.50, 1,0)
+
+# convert it into a table
+table_predicted_test <- table(Predicted = predicted_test, Actual = test$left)
+table_predicted_test
+
+# cm for logistic regression
+confusionMatrix(table_predicted_test, mode = "everything")
+
+```
+
+# decision tree model
+```{r}
+# initiate decision tree model
+fit <- rpart(left~., data = train, method = 'class')
+rpart.plot(fit, extra = 106)
+
+# compute probility for tree model
+tree_prob <-predict(fit, test, type = 'prob')
+
+
+# compute AUC for tree model
+tree_auc <- auc(test$left, tree_prob[,2])
+tree_auc
+
+# predict tree model using test dataset
+tree_predict <- predict(fit,test,type='class')
+
+# cm for tree model
+tree_cm <- confusionMatrix(as.factor(test$left),tree_predict, mode = "everything")
+tree_cm
+
+```
+
+```{r}
+# improve the model by tuning it
+control <- rpart.control(xval=4, minsplit = 2,
+                         minbucket = round(6 / 3),
+                         maxdepth = 4,
+                         cp = 0)
+tune_fit <- rpart(left~., data = train, method="class", control = control)
+
+# compute auc for tunned tree model on test dataset
+tree_prob2 <-predict(tune_fit, test, type = 'prob')
+tree_auc2 <- auc(test$left, tree_prob2[,2])
+tree_auc2
+
+# compute cm for tunned tree model
+tree_predict2 <-predict(tune_fit, test, type = 'class')
+tree_cm2 <- confusionMatrix(as.factor(test$left),tree_predict2, mode = "everything")
+tree_cm2
+
+
+```
+
+# random forest model
+```{r}
+## Set seed for reproducibility
+set.seed(42)
+
+## Split the data so that we use 75% of it for training
+train_index <- createDataPartition(y=df_logreg$left, p=0.75, list=FALSE)
+repeat_cv <- trainControl(method='repeatedcv', number=4,repeats=4,classProbs=T)
+
+## Subset the data
+training_set <- df_logreg[train_index, ]
+testing_set <- df_logreg[-train_index, ]
+
+training_set$left <- as.factor(training_set$left)
+training_set$left <- ifelse(training_set$left=="1","yes","no")
+
+## Train a random forest model
+forest <- train(left~., 
+  data=training_set, 
+  method='rf', 
+  trControl=repeat_cv,
+  metric='AUC')
+
+## Print out the details about the model
+forest$finalModel
+
+# compute roc score
+forest_prob <- predict(forest, testing_set, type = "prob")
+head(forest_prob)
+forest_auc <- auc(testing_set$left,forest_prob[,2])
+forest_auc
+
+## Generate predictions for cm
+y_hats <- predict(object=forest,  newdata=testing_set[, -7])
+head(y_hats)
+testing_set$left <- ifelse(testing_set$left=="1","yes","no")
+forest_cm <- confusionMatrix(as.factor(testing_set$left),y_hats,mode='everything')
+forest_cm
+
+```
+
+# Feature Engineering
+```{r}
+# create new feature (overworked)
+df3 <- df_enco
+df3 <- df3 %>% mutate(overworked = df3$average_monthly_hours)
+df3$overworked <- ifelse(df3$overworked>175,1,0)
+
+# drop unuse columns
+df3$average_monthly_hours <- NULL
+df3$satisfaction_level<- NULL
+```
+
+```{r}
+# round 2 tree base model 
+set.seed(42)
+
+indexset2 <- createDataPartition(df3$left,p = 0.75,list = F)
+train2 <- df3[indexset2,]
+test2 <- df3[-indexset2,]
+
+
+tune_fit2 <- rpart(left~., data = train2, method="class", control = control)
+
+tree_prob3 <-predict(tune_fit2, test2, type = 'prob')
+tree_auc3 <- auc(test2$left, tree_prob3[,2])
+tree_auc3
+
+tree_predict3 <-predict(tune_fit2, test2, type = 'class')
+cm_tree3 <- confusionMatrix(as.factor(test2$left),tree_predict3, mode = "everything")
+cm_tree3
+```
+
+```{r}
+# random forest round 2
+## Set seed for reproducibility
+set.seed(42)
+
+## Split the data so that we use 75% of it for training
+train_index2 <- createDataPartition(y=df3$left, p=0.75, list=FALSE)
+repeat_cv <- trainControl(method='repeatedcv', number=4,repeats=4,classProbs=T)
+
+## Subset the data
+training_set2 <- df3[train_index2, ]
+testing_set2 <- df3[-train_index2, ]
+
+training_set2$left <- as.factor(training_set2$left)
+training_set2$left <- ifelse(training_set2$left=="1","yes","no")
+
+## Train a random forest model
+forest2 <- train(left~., 
+  data=training_set2, 
+  method='rf', 
+  trControl=repeat_cv,
+  metric='AUC')
+
+## Print out the details about the model
+forest2$finalModel
+
+# compute roc score
+forest_prob2 <- predict(forest2, testing_set2, type = "prob")
+head(forest_prob2)
+forest_auc2 <- auc(testing_set2$left,forest_prob2[,2])
+forest_auc2
+
+## Generate predictions for cm
+y_hats2 <- predict(object=forest2,  newdata=testing_set2[, -5])
+head(y_hats2)
+testing_set2$left <- ifelse(testing_set2$left=="1","yes","no")
+forest_cm2 <- confusionMatrix(as.factor(testing_set2$left),y_hats2,mode='everything')
+forest_cm2
+```
+
+```{r}
+# plot tree model
+rpart.plot(tune_fit2, extra = 106)
+```
+
+```{r}
+tree2_vip <- vip(tune_fit2)
+tree2_vip
+```
+
+```{r}
+forest2_vip <- vip(forest2)
+forest2_vip
+```
+
+# summary
+Logistic Regression
+
+The logistic regression model achieved precision of 87%, recall of 94%, f1-score of 90% (all weighted averages), and accuracy of 83%, on the test set.
+
+Tree-based Machine Learning
+
+After conducting feature engineering, the decision tree model achieved AUC of 95.4%, precision of 95.8%, recall of 96.7%, f1-score of 96.3%, and accuracy of 93.7%, on the test set. the random forest model achieved AUC of 96.5%, precision of 98.5%, recall of 97.9%, f1-score of 98.2%, and accuracy of 97.0%, on the test set.The random forest modestly outperformed the decision tree model. 
+
+
+# Conclusion, Recommendations, Next Steps
+
+The models and the feature importances extracted from the models confirm that employees at the company are overworked. 
+
+To retain employees, the following recommendations could be presented to the stakeholders:
+
+* Cap the number of projects that employees can work on.
+* Consider promoting employees who have been with the company for atleast four years, or conduct further investigation about why four-year tenured employees are so dissatisfied. 
+* Either reward employees for working longer hours, or don't require them to do so. 
+* If employees aren't familiar with the company's overtime pay policies, inform them about this. If the expectations around workload and time off aren't explicit, make them clear. 
+* Hold company-wide and within-team discussions to understand and address the company work culture, across the board and in specific contexts. 
+* High evaluation scores should not be reserved for employees who work 200+ hours per month. Consider a proportionate scale for rewarding employees who contribute more/put in more effort. 
+
+**Next Steps**
+
+It may be justified to still have some concern about data leakage. It could be prudent to consider how predictions change when `last_evaluation` is removed from the data. It's possible that evaluations aren't performed very frequently, in which case it would be useful to be able to predict employee retention without this feature. It's also possible that the evaluation score determines whether an employee leaves or stays, in which case it could be useful to pivot and try to predict performance score. The same could be said for satisfaction score. 
+
+For another project, you could try building a K-means model on this data and analyzing the clusters. This may yield valuable insight. 

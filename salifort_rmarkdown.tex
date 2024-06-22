@@ -1,0 +1,1466 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Salifort Capstone Project},
+  pdfauthor={ng khuang yang},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Salifort Capstone Project}
+\author{ng khuang yang}
+\date{2024-06-21}
+
+\begin{document}
+\maketitle
+
+\subsection{R Markdown}\label{r-markdown}
+
+The HR department at Salifort Motors wants to take some initiatives to
+improve employee satisfaction levels at the company. Because it is
+time-consuming and expensive to find, interview, and hire new employees,
+increasing employee retention will be beneficial to the company.
+
+Your goals in this project are to analyze the data collected by the HR
+department and to build a model that predicts whether or not an employee
+will leave the company.
+
+\section{Understand your dataset}\label{understand-your-dataset}
+
+The dataset that you'll be using in this lab contains 15,000 rows and 10
+columns for the variables listed below.
+
+For more information about the data, refer to its source on Kaggle
+\href{https://www.kaggle.com/datasets/mfaisalqureshi/hr-analytics-and-job-prediction?select=HR_comma_sep.csv}{link}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# import dataset}
+\NormalTok{df }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"C:/Users/khuan/Downloads/salifort capstone/HR\_capstone\_dataset.csv"}\NormalTok{, }\AttributeTok{header =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# display colnames}
+\FunctionTok{colnames}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  [1] "satisfaction_level"    "last_evaluation"       "number_project"       
+##  [4] "average_montly_hours"  "time_spend_company"    "Work_accident"        
+##  [7] "left"                  "promotion_last_5years" "Department"           
+## [10] "salary"
+\end{verbatim}
+
+\includegraphics{C:/Users/khuan/Downloads/salifort capstone/columns details.png}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# install and activate libraries}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## -- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+## v dplyr     1.1.4     v readr     2.1.5
+## v forcats   1.0.0     v stringr   1.5.1
+## v ggplot2   3.5.1     v tibble    3.2.1
+## v lubridate 1.9.3     v tidyr     1.3.1
+## v purrr     1.0.2     
+## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()
+## i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(psych)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'psych'
+## 
+## The following objects are masked from 'package:ggplot2':
+## 
+##     %+%, alpha
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(data.table)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'data.table'
+## 
+## The following objects are masked from 'package:lubridate':
+## 
+##     hour, isoweek, mday, minute, month, quarter, second, wday, week,
+##     yday, year
+## 
+## The following objects are masked from 'package:dplyr':
+## 
+##     between, first, last
+## 
+## The following object is masked from 'package:purrr':
+## 
+##     transpose
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(gridExtra)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'gridExtra'
+## 
+## The following object is masked from 'package:dplyr':
+## 
+##     combine
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(ggplot2)}
+\FunctionTok{library}\NormalTok{(dplyr)}
+\FunctionTok{library}\NormalTok{(reshape2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'reshape2'
+## 
+## The following objects are masked from 'package:data.table':
+## 
+##     dcast, melt
+## 
+## The following object is masked from 'package:tidyr':
+## 
+##     smiths
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(}\StringTok{\textquotesingle{}fastDummies\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Thank you for using fastDummies!
+## To acknowledge our work, please cite the package:
+## Kaplan, J. & Schlegel, B. (2023). fastDummies: Fast Creation of Dummy (Binary) Columns and Rows from Categorical Variables. Version 1.7.1. URL: https://github.com/jacobkap/fastDummies, https://jacobkap.github.io/fastDummies/.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(caret)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: lattice
+## 
+## Attaching package: 'caret'
+## 
+## The following object is masked from 'package:purrr':
+## 
+##     lift
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(pscl)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Classes and Methods for R originally developed in the
+## Political Science Computational Laboratory
+## Department of Political Science
+## Stanford University (2002-2015),
+## by and under the direction of Simon Jackman.
+## hurdle and zeroinfl functions by Achim Zeileis.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(e1071)}
+\FunctionTok{library}\NormalTok{(ISLR)}
+\FunctionTok{library}\NormalTok{(rpart)}
+\FunctionTok{library}\NormalTok{(rpart.plot)}
+\FunctionTok{library}\NormalTok{(pROC)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Type 'citation("pROC")' for a citation.
+## 
+## Attaching package: 'pROC'
+## 
+## The following objects are masked from 'package:stats':
+## 
+##     cov, smooth, var
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(randomForest)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## randomForest 4.7-1.1
+## Type rfNews() to see new features/changes/bug fixes.
+## 
+## Attaching package: 'randomForest'
+## 
+## The following object is masked from 'package:gridExtra':
+## 
+##     combine
+## 
+## The following object is masked from 'package:psych':
+## 
+##     outlier
+## 
+## The following object is masked from 'package:dplyr':
+## 
+##     combine
+## 
+## The following object is masked from 'package:ggplot2':
+## 
+##     margin
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(vip)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'vip'
+## 
+## The following object is masked from 'package:utils':
+## 
+##     vi
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# rename col names}
+\FunctionTok{setnames}\NormalTok{(df,  }\AttributeTok{old=}\FunctionTok{c}\NormalTok{(}\StringTok{"average\_montly\_hours"}\NormalTok{), }\AttributeTok{new=}\FunctionTok{c}\NormalTok{(}\StringTok{"average\_monthly\_hours"}\NormalTok{))}
+\FunctionTok{setnames}\NormalTok{(df,  }\AttributeTok{old=}\FunctionTok{c}\NormalTok{(}\StringTok{"time\_spend\_company"}\NormalTok{), }\AttributeTok{new=}\FunctionTok{c}\NormalTok{(}\StringTok{"tenure"}\NormalTok{))}
+\CommentTok{\# set col to lowercase}
+\NormalTok{df }\OtherTok{\textless{}{-}}\FunctionTok{rename\_with}\NormalTok{(df,tolower)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# determine NA }
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{is.na}\NormalTok{(df))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# determine duplicated}
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{duplicated}\NormalTok{(df))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 3008
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# filter out duplicated col and evaluated it}
+\NormalTok{df\_duplicated }\OtherTok{\textless{}{-}}\NormalTok{ df }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{duplicate =} \FunctionTok{duplicated}\NormalTok{(df))}
+\NormalTok{df\_duplicated }\OtherTok{\textless{}{-}}\NormalTok{ df\_duplicated }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(duplicate}\SpecialCharTok{==}\StringTok{\textquotesingle{}TRUE\textquotesingle{}}\NormalTok{)}
+\NormalTok{df\_duplicated }\OtherTok{\textless{}{-}} \FunctionTok{sort\_by}\NormalTok{(df\_duplicated, }\FunctionTok{list}\NormalTok{(df\_duplicated}\SpecialCharTok{$}\NormalTok{satisfaction\_level,df\_duplicated}\SpecialCharTok{$}\NormalTok{last\_evaluation,df\_duplicated}\SpecialCharTok{$}\NormalTok{number\_project,df\_duplicated}\SpecialCharTok{$}\NormalTok{average\_monthly\_hours,df\_duplicated}\SpecialCharTok{$}\NormalTok{tenure,df\_duplicated}\SpecialCharTok{$}\NormalTok{work\_accident,df\_duplicated}\SpecialCharTok{$}\NormalTok{work\_accident,df\_duplicated}\SpecialCharTok{$}\NormalTok{left,df\_duplicated}\SpecialCharTok{$}\NormalTok{promotion\_last\_5years,df\_duplicated}\SpecialCharTok{$}\NormalTok{department,df\_duplicated}\SpecialCharTok{$}\NormalTok{salary))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# show duplicated dataset}
+\FunctionTok{head}\NormalTok{(df\_duplicated, }\AttributeTok{n =} \FunctionTok{c}\NormalTok{(}\DecValTok{6}\NormalTok{, }\DecValTok{10}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##      satisfaction_level last_evaluation number_project average_monthly_hours
+## 40                 0.09            0.62              6                   294
+## 2251               0.09            0.62              6                   294
+## 81                 0.09            0.77              5                   275
+## 2292               0.09            0.77              5                   275
+## 662                0.09            0.77              6                   290
+## 2873               0.09            0.77              6                   290
+##      tenure work_accident left promotion_last_5years  department salary
+## 40        4             0    1                     0  accounting    low
+## 2251      4             0    1                     0  accounting    low
+## 81        4             0    1                     0 product_mng medium
+## 2292      4             0    1                     0 product_mng medium
+## 662       4             0    1                     0   technical medium
+## 2873      4             0    1                     0   technical medium
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# remove duplicated}
+\NormalTok{df1 }\OtherTok{\textless{}{-}} \FunctionTok{distinct}\NormalTok{(df)}
+\CommentTok{\# confirm no duplicated}
+\FunctionTok{sum}\NormalTok{(}\FunctionTok{duplicated}\NormalTok{(df1))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 0
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# plot tenure boxplot}
+\FunctionTok{boxplot}\NormalTok{(df1}\SpecialCharTok{$}\NormalTok{tenure)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{salifort_rmarkdown_files/figure-latex/unnamed-chunk-9-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# determine upper \& lower limit}
+\NormalTok{q1 }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(df1}\SpecialCharTok{$}\NormalTok{tenure,}\AttributeTok{probs =} \FloatTok{0.25}\NormalTok{)}
+\NormalTok{q3 }\OtherTok{\textless{}{-}} \FunctionTok{quantile}\NormalTok{(df1}\SpecialCharTok{$}\NormalTok{tenure,}\AttributeTok{probs =} \FloatTok{0.75}\NormalTok{)}
+\NormalTok{iqr }\OtherTok{\textless{}{-}}\NormalTok{ q3}\SpecialCharTok{{-}}\NormalTok{q1}
+\NormalTok{upper\_limit }\OtherTok{\textless{}{-}}\NormalTok{ q3}\SpecialCharTok{+}\NormalTok{(iqr}\SpecialCharTok{*}\FloatTok{1.5}\NormalTok{)}
+\NormalTok{lower\_limit }\OtherTok{\textless{}{-}}\NormalTok{ q1}\SpecialCharTok{{-}}\NormalTok{(iqr}\SpecialCharTok{*}\FloatTok{1.5}\NormalTok{)}
+\FunctionTok{print}\NormalTok{(upper\_limit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 75% 
+## 5.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{print}\NormalTok{(lower\_limit)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 25% 
+## 1.5
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# draw left table}
+\NormalTok{df\_left }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(df1}\SpecialCharTok{$}\NormalTok{left)}
+\NormalTok{df\_left }\OtherTok{\textless{}{-}} \FunctionTok{data.frame}\NormalTok{(df\_left)}
+\NormalTok{df\_left }\OtherTok{\textless{}{-}}\NormalTok{ df\_left }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{percent =}\NormalTok{ Freq}\SpecialCharTok{/}\FunctionTok{sum}\NormalTok{(Freq))}
+\NormalTok{df\_left}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Var1  Freq   percent
+## 1    0 10000 0.8339588
+## 2    1  1991 0.1660412
+\end{verbatim}
+
+\section{Data vitualisation}\label{data-vitualisation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# boxplot : hours vs projects (left)}
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{ df1, }\AttributeTok{mapping=} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\FunctionTok{as.character}\NormalTok{(number\_project), }\AttributeTok{y=}\NormalTok{average\_monthly\_hours,}\AttributeTok{fill=}\FunctionTok{as.factor}\NormalTok{(left))) }\SpecialCharTok{+}
+\FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"hours vs project"}\NormalTok{, }\AttributeTok{x=}\StringTok{"project"}\NormalTok{, }\AttributeTok{y=}\StringTok{"hours"}\NormalTok{)}\SpecialCharTok{+} \FunctionTok{scale\_fill\_manual}\NormalTok{(}\StringTok{\textquotesingle{}0:stayed}\SpecialCharTok{\textbackslash{}n}\StringTok{1:quit\textquotesingle{}}\NormalTok{, }\AttributeTok{values=}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}pink\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{salifort_rmarkdown_files/figure-latex/unnamed-chunk-12-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# barplot : projects vs left}
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position=}\StringTok{\textquotesingle{}dodge\textquotesingle{}}\NormalTok{,}\AttributeTok{data=}\NormalTok{ df1, }\AttributeTok{mapping=} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{number\_project, }\AttributeTok{fill =} \FunctionTok{as.factor}\NormalTok{(left)))}\SpecialCharTok{+}
+\FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"project vs left"}\NormalTok{, }\AttributeTok{x=}\StringTok{"project"}\NormalTok{, }\AttributeTok{y=}\StringTok{"count"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{scale\_fill\_manual}\NormalTok{(}\StringTok{\textquotesingle{}0:stayed}\SpecialCharTok{\textbackslash{}n}\StringTok{1:quit\textquotesingle{}}\NormalTok{, }\AttributeTok{values=}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}pink\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{salifort_rmarkdown_files/figure-latex/unnamed-chunk-13-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# scatterplot : hours vs sat\_level (left)}
+\NormalTok{scatter1 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(df1, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ average\_monthly\_hours, }\AttributeTok{y =}\NormalTok{ satisfaction\_level)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =} \FunctionTok{as.factor}\NormalTok{(left)),}\AttributeTok{alpha=}\FloatTok{0.3}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{scale\_color\_manual}\NormalTok{(}\StringTok{\textquotesingle{}0:stayed}\SpecialCharTok{\textbackslash{}n}\StringTok{1:quit\textquotesingle{}}\NormalTok{, }\AttributeTok{values=}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{))}\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept=}\FloatTok{166.67}\NormalTok{, }\AttributeTok{linetype=}\StringTok{\textquotesingle{}dashed\textquotesingle{}}\NormalTok{, }\AttributeTok{color=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, }\AttributeTok{linewidth=}\DecValTok{2}\NormalTok{)}
+\NormalTok{scatter1}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{salifort_rmarkdown_files/figure-latex/unnamed-chunk-14-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# boxplot : satis\_level vs tenure (left)}
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_boxplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{ df1, }\AttributeTok{mapping=} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\FunctionTok{as.factor}\NormalTok{(tenure), }\AttributeTok{y=}\NormalTok{satisfaction\_level,}\AttributeTok{fill=}\FunctionTok{as.factor}\NormalTok{(left))) }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"S\_level vs tenure"}\NormalTok{, }\AttributeTok{x=}\StringTok{"tenure"}\NormalTok{, }\AttributeTok{y=}\StringTok{"satisfy\_level"}\NormalTok{)}\SpecialCharTok{+} \FunctionTok{scale\_fill\_manual}\NormalTok{(}\StringTok{\textquotesingle{}0:stayed}\SpecialCharTok{\textbackslash{}n}\StringTok{1:quit\textquotesingle{}}\NormalTok{, }\AttributeTok{values=}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}pink\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{salifort_rmarkdown_files/figure-latex/unnamed-chunk-15-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# barplot : tenure vs left}
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position=}\StringTok{\textquotesingle{}dodge\textquotesingle{}}\NormalTok{,}\AttributeTok{data=}\NormalTok{ df1, }\AttributeTok{mapping=} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{tenure, }\AttributeTok{fill =} \FunctionTok{as.factor}\NormalTok{(left)))}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"tenure vs left"}\NormalTok{, }\AttributeTok{x=}\StringTok{"tenure"}\NormalTok{, }\AttributeTok{y=}\StringTok{"count"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{scale\_fill\_manual}\NormalTok{(}\StringTok{\textquotesingle{}0:stayed}\SpecialCharTok{\textbackslash{}n}\StringTok{1:quit\textquotesingle{}}\NormalTok{, }\AttributeTok{values=}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}pink\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{salifort_rmarkdown_files/figure-latex/unnamed-chunk-16-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# scatterplot : hours vs eval (left)}
+\NormalTok{scatter2 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(df1, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ average\_monthly\_hours, }\AttributeTok{y =}\NormalTok{ last\_evaluation)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =} \FunctionTok{as.factor}\NormalTok{(left)),}\AttributeTok{alpha=}\FloatTok{0.3}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{scale\_color\_manual}\NormalTok{(}\StringTok{\textquotesingle{}0:stayed}\SpecialCharTok{\textbackslash{}n}\StringTok{1:quit\textquotesingle{}}\NormalTok{, }\AttributeTok{values=}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{))}\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept=}\FloatTok{166.67}\NormalTok{, }\AttributeTok{linetype=}\StringTok{\textquotesingle{}dashed\textquotesingle{}}\NormalTok{, }\AttributeTok{color=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, }\AttributeTok{linewidth=}\DecValTok{2}\NormalTok{)}
+\NormalTok{scatter2}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{salifort_rmarkdown_files/figure-latex/unnamed-chunk-17-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# table : mean \& median satisf\_level}
+\NormalTok{table\_mean\_median\_SLevel }\OtherTok{\textless{}{-}}\NormalTok{ df1 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{group\_by}\NormalTok{(df1}\SpecialCharTok{$}\NormalTok{left) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(satisfaction\_level) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{summarize}\NormalTok{(}\AttributeTok{mean=}\FunctionTok{mean}\NormalTok{(satisfaction\_level),}\FunctionTok{median}\NormalTok{(satisfaction\_level))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Adding missing grouping variables: `df1$left`
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{table\_mean\_median\_SLevel}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tibble: 2 x 3
+##   `df1$left`  mean `median(satisfaction_level)`
+##        <int> <dbl>                        <dbl>
+## 1          0 0.667                         0.69
+## 2          1 0.440                         0.41
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# split tenure into 2 groups(1{-}5,6{-}10)}
+\NormalTok{salary\_5 }\OtherTok{\textless{}{-}}\NormalTok{ df1 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(tenure}\SpecialCharTok{\textless{}=}\DecValTok{5}\NormalTok{) }
+\NormalTok{salary\_10 }\OtherTok{\textless{}{-}}\NormalTok{ df1 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(tenure}\SpecialCharTok{\textgreater{}}\DecValTok{5}\NormalTok{)}
+\CommentTok{\# barplot : salary vs tenure 1{-}5}
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position=}\StringTok{\textquotesingle{}dodge\textquotesingle{}}\NormalTok{,}\AttributeTok{data=}\NormalTok{ salary\_5, }\AttributeTok{mapping=} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{tenure, }\AttributeTok{fill =} \FunctionTok{factor}\NormalTok{(salary,}\AttributeTok{levels=}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}low\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}medium\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}high\textquotesingle{}}\NormalTok{))))}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"tenure vs salary"}\NormalTok{, }\AttributeTok{x=}\StringTok{"tenure"}\NormalTok{, }\AttributeTok{y=}\StringTok{"salary"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{scale\_fill\_manual}\NormalTok{(}\StringTok{\textquotesingle{}salary\textquotesingle{}}\NormalTok{, }\AttributeTok{values=}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}orange\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}pink\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{salifort_rmarkdown_files/figure-latex/unnamed-chunk-19-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# barplot : salary vs tenure 6{-}10}
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position=}\StringTok{\textquotesingle{}dodge\textquotesingle{}}\NormalTok{,}\AttributeTok{data=}\NormalTok{ salary\_10, }\AttributeTok{mapping=} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{tenure, }\AttributeTok{fill =} \FunctionTok{factor}\NormalTok{(salary,}\AttributeTok{levels=}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}low\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}medium\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}high\textquotesingle{}}\NormalTok{))))}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"tenure vs salary"}\NormalTok{, }\AttributeTok{x=}\StringTok{"tenure"}\NormalTok{, }\AttributeTok{y=}\StringTok{"salary"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{scale\_fill\_manual}\NormalTok{(}\StringTok{\textquotesingle{}salary\textquotesingle{}}\NormalTok{, }\AttributeTok{values=}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}orange\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}pink\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{salifort_rmarkdown_files/figure-latex/unnamed-chunk-19-2.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# scatterplot : hours vs promotion (left)}
+\FunctionTok{ggplot}\NormalTok{(df1, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ average\_monthly\_hours, }\AttributeTok{y =}\NormalTok{ promotion\_last\_5years)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{color =} \FunctionTok{as.factor}\NormalTok{(left)),}\AttributeTok{alpha=}\FloatTok{0.3}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{scale\_color\_manual}\NormalTok{(}\StringTok{\textquotesingle{}0:stayed}\SpecialCharTok{\textbackslash{}n}\StringTok{1:quit\textquotesingle{}}\NormalTok{, }\AttributeTok{values=}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{))}\SpecialCharTok{+}
+  \FunctionTok{geom\_vline}\NormalTok{(}\AttributeTok{xintercept=}\FloatTok{166.67}\NormalTok{, }\AttributeTok{linetype=}\StringTok{\textquotesingle{}dashed\textquotesingle{}}\NormalTok{, }\AttributeTok{color=}\StringTok{\textquotesingle{}blue\textquotesingle{}}\NormalTok{, }\AttributeTok{linewidth=}\DecValTok{2}\NormalTok{,}\AttributeTok{show.legend =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{salifort_rmarkdown_files/figure-latex/unnamed-chunk-20-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# barplot : departments vs left}
+\FunctionTok{ggplot}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{position=}\StringTok{\textquotesingle{}dodge\textquotesingle{}}\NormalTok{,}\AttributeTok{data=}\NormalTok{ df1, }\AttributeTok{mapping=} \FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{department, }\AttributeTok{fill =} \FunctionTok{as.factor}\NormalTok{(left)))}\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title=}\StringTok{"department vs left"}\NormalTok{, }\AttributeTok{x=}\StringTok{"department"}\NormalTok{, }\AttributeTok{y=}\StringTok{"count"}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{))}\SpecialCharTok{+}
+  \FunctionTok{scale\_fill\_manual}\NormalTok{(}\StringTok{\textquotesingle{}0:stayed}\SpecialCharTok{\textbackslash{}n}\StringTok{1:quit\textquotesingle{}}\NormalTok{, }\AttributeTok{values=}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}green\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{salifort_rmarkdown_files/figure-latex/unnamed-chunk-21-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# heatmap}
+\NormalTok{df2 }\OtherTok{\textless{}{-}} \FunctionTok{mutate\_all}\NormalTok{(df1, }\ControlFlowTok{function}\NormalTok{(x) }\FunctionTok{as.numeric}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(x)))}
+\FunctionTok{heatmap}\NormalTok{(}\FunctionTok{cor}\NormalTok{(df2),}\AttributeTok{Rowv =} \ConstantTok{NA}\NormalTok{, }\AttributeTok{Colv =} \ConstantTok{NA}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{salifort_rmarkdown_files/figure-latex/unnamed-chunk-22-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# creating correlation matrix}
+\NormalTok{corr\_mat }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{cor}\NormalTok{(df2),}\DecValTok{3}\NormalTok{)}
+\NormalTok{melted\_corr\_mat }\OtherTok{\textless{}{-}} \FunctionTok{melt}\NormalTok{(corr\_mat)}
+\NormalTok{heatmap2 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data =}\NormalTok{ melted\_corr\_mat, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{Var1, }\AttributeTok{y=}\NormalTok{Var2, }\AttributeTok{fill=}\NormalTok{value, }\AttributeTok{colour =} \StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{)) }\SpecialCharTok{+}
+  \FunctionTok{geom\_tile}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(Var2, Var1, }\AttributeTok{label =}\NormalTok{ value), }
+            \AttributeTok{color =} \StringTok{"red"}\NormalTok{, }\AttributeTok{size =} \DecValTok{4}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{))}
+\NormalTok{heatmap2}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{salifort_rmarkdown_files/figure-latex/unnamed-chunk-23-1.pdf}
+
+\section{Building binary logistic
+regression}\label{building-binary-logistic-regression}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# dummy variables}
+\NormalTok{df\_enco }\OtherTok{\textless{}{-}}\NormalTok{ df1}
+\NormalTok{df\_enco}\SpecialCharTok{$}\NormalTok{left }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(df\_enco}\SpecialCharTok{$}\NormalTok{left)}
+\NormalTok{df\_enco}\SpecialCharTok{$}\NormalTok{salary }\OtherTok{\textless{}{-}} \FunctionTok{factor}\NormalTok{(df\_enco}\SpecialCharTok{$}\NormalTok{salary,}\AttributeTok{levels=}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}low\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}medium\textquotesingle{}}\NormalTok{,}\StringTok{\textquotesingle{}high\textquotesingle{}}\NormalTok{))}
+\NormalTok{df\_enco}\SpecialCharTok{$}\NormalTok{salary }\OtherTok{\textless{}{-}} \FunctionTok{as.numeric}\NormalTok{(df\_enco}\SpecialCharTok{$}\NormalTok{salary)}
+\NormalTok{df\_enco }\OtherTok{\textless{}{-}} \FunctionTok{dummy\_cols}\NormalTok{(df\_enco, }\AttributeTok{select\_columns =} \FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}department\textquotesingle{}}\NormalTok{),}
+                      \AttributeTok{remove\_selected\_columns =} \ConstantTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# filter out departments}
+\NormalTok{df\_enco\_flt }\OtherTok{\textless{}{-}}\NormalTok{ df\_enco }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{select}\NormalTok{(last\_evaluation,number\_project,average\_monthly\_hours,tenure,work\_accident,left,promotion\_last\_5years,salary)}
+\CommentTok{\# plot heatmap}
+\NormalTok{cor\_df2 }\OtherTok{\textless{}{-}} \FunctionTok{round}\NormalTok{(}\FunctionTok{cor}\NormalTok{(df\_enco\_flt),}\DecValTok{3}\NormalTok{)}
+\NormalTok{melt\_df }\OtherTok{\textless{}{-}} \FunctionTok{melt}\NormalTok{(cor\_df2)}
+\NormalTok{heatmap3 }\OtherTok{\textless{}{-}} \FunctionTok{ggplot}\NormalTok{(melt\_df,}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x =}\NormalTok{ Var1, }\AttributeTok{y =}\NormalTok{ Var2,}\AttributeTok{fill =}\NormalTok{ value))}\SpecialCharTok{+}
+  \FunctionTok{geom\_tile}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{scale\_fill\_distiller}\NormalTok{(}\AttributeTok{palette =} \StringTok{"Spectral"}\NormalTok{)}\SpecialCharTok{+}
+  \FunctionTok{geom\_tile}\NormalTok{() }\SpecialCharTok{+}
+  \FunctionTok{labs}\NormalTok{(}\AttributeTok{title =} \StringTok{"Correlation Heatmap"}\NormalTok{,}
+       \AttributeTok{x =} \StringTok{"Variable 1"}\NormalTok{,}
+       \AttributeTok{y =} \StringTok{"Variable 2"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{geom\_text}\NormalTok{(}\FunctionTok{aes}\NormalTok{(Var2, Var1, }\AttributeTok{label =}\NormalTok{ value), }
+                                     \AttributeTok{color =} \StringTok{"black"}\NormalTok{, }\AttributeTok{size =} \DecValTok{4}\NormalTok{)}\SpecialCharTok{+}\FunctionTok{theme}\NormalTok{(}\AttributeTok{axis.text.x =} \FunctionTok{element\_text}\NormalTok{(}\AttributeTok{angle =} \DecValTok{90}\NormalTok{))}
+\NormalTok{heatmap3}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{salifort_rmarkdown_files/figure-latex/unnamed-chunk-25-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# filtered out outliers}
+\NormalTok{df\_logreg }\OtherTok{\textless{}{-}}\NormalTok{ df\_enco }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{filter}\NormalTok{(tenure}\SpecialCharTok{\textgreater{}=}\FloatTok{1.5}\SpecialCharTok{\&}\NormalTok{tenure}\SpecialCharTok{\textless{}=}\FloatTok{5.5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
+\CommentTok{\# training dataset}
+\NormalTok{indexset }\OtherTok{\textless{}{-}} \FunctionTok{createDataPartition}\NormalTok{(df\_logreg}\SpecialCharTok{$}\NormalTok{left,}\AttributeTok{p =} \FloatTok{0.75}\NormalTok{,}\AttributeTok{list =}\NormalTok{ F)}
+\NormalTok{train }\OtherTok{\textless{}{-}}\NormalTok{ df\_logreg[indexset,]}
+\NormalTok{test }\OtherTok{\textless{}{-}}\NormalTok{ df\_logreg[}\SpecialCharTok{{-}}\NormalTok{indexset,]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# fit logistic regression model}
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{glm}\NormalTok{(left}\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{family=}\StringTok{"binomial"}\NormalTok{, }\AttributeTok{data=}\NormalTok{train)}
+
+\CommentTok{\#disable scientific notation for model summary}
+\FunctionTok{options}\NormalTok{(}\AttributeTok{scipen=}\DecValTok{999}\NormalTok{)}
+
+\CommentTok{\#view model summary}
+\NormalTok{model}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:  glm(formula = left ~ ., family = "binomial", data = train)
+## 
+## Coefficients:
+##            (Intercept)      satisfaction_level         last_evaluation  
+##              -0.645877               -4.560496               -0.019529  
+##         number_project   average_monthly_hours                  tenure  
+##              -0.473278                0.003766                1.068130  
+##          work_accident   promotion_last_5years                  salary  
+##              -1.488957               -1.232367               -0.537264  
+##  department_accounting           department_hr           department_IT  
+##              -0.052130                0.011768               -0.105508  
+##  department_management    department_marketing  department_product_mng  
+##               0.012644                0.078349               -0.274936  
+##       department_RandD        department_sales      department_support  
+##              -0.373843                0.112025                0.026937  
+##   department_technical  
+##                     NA  
+## 
+## Degrees of Freedom: 8375 Total (i.e. Null);  8358 Residual
+## Null Deviance:       7672 
+## Residual Deviance: 5376  AIC: 5412
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# r2}
+\NormalTok{r2 }\OtherTok{\textless{}{-}} \FunctionTok{pR2}\NormalTok{(model)[}\StringTok{"McFadden"}\NormalTok{]}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## fitting null model for pseudo-r2
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{r2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##  McFadden 
+## 0.2993338
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# calculate probability of default for each individual in test dataset}
+\NormalTok{predicted }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(model, test, }\AttributeTok{type=}\StringTok{"response"}\NormalTok{)}
+
+\NormalTok{predicted\_test }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(predicted }\SpecialCharTok{\textgreater{}} \FloatTok{0.50}\NormalTok{, }\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+
+\CommentTok{\# convert it into a table}
+\NormalTok{table\_predicted\_test }\OtherTok{\textless{}{-}} \FunctionTok{table}\NormalTok{(}\AttributeTok{Predicted =}\NormalTok{ predicted\_test, }\AttributeTok{Actual =}\NormalTok{ test}\SpecialCharTok{$}\NormalTok{left)}
+\NormalTok{table\_predicted\_test}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##          Actual
+## Predicted    0    1
+##         0 2202  332
+##         1  142  115
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# cm for logistic regression}
+\FunctionTok{confusionMatrix}\NormalTok{(table\_predicted\_test, }\AttributeTok{mode =} \StringTok{"everything"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##          Actual
+## Predicted    0    1
+##         0 2202  332
+##         1  142  115
+##                                              
+##                Accuracy : 0.8302             
+##                  95% CI : (0.8157, 0.8439)   
+##     No Information Rate : 0.8398             
+##     P-Value [Acc > NIR] : 0.9213             
+##                                              
+##                   Kappa : 0.2375             
+##                                              
+##  Mcnemar's Test P-Value : <0.0000000000000002
+##                                              
+##             Sensitivity : 0.9394             
+##             Specificity : 0.2573             
+##          Pos Pred Value : 0.8690             
+##          Neg Pred Value : 0.4475             
+##               Precision : 0.8690             
+##                  Recall : 0.9394             
+##                      F1 : 0.9028             
+##              Prevalence : 0.8398             
+##          Detection Rate : 0.7890             
+##    Detection Prevalence : 0.9079             
+##       Balanced Accuracy : 0.5983             
+##                                              
+##        'Positive' Class : 0                  
+## 
+\end{verbatim}
+
+\section{decision tree model}\label{decision-tree-model}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# initiate decision tree model}
+\NormalTok{fit }\OtherTok{\textless{}{-}} \FunctionTok{rpart}\NormalTok{(left}\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data =}\NormalTok{ train, }\AttributeTok{method =} \StringTok{\textquotesingle{}class\textquotesingle{}}\NormalTok{)}
+\FunctionTok{rpart.plot}\NormalTok{(fit, }\AttributeTok{extra =} \DecValTok{106}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{salifort_rmarkdown_files/figure-latex/unnamed-chunk-30-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# compute probility for tree model}
+\NormalTok{tree\_prob }\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(fit, test, }\AttributeTok{type =} \StringTok{\textquotesingle{}prob\textquotesingle{}}\NormalTok{)}
+
+
+\CommentTok{\# compute AUC for tree model}
+\NormalTok{tree\_auc }\OtherTok{\textless{}{-}} \FunctionTok{auc}\NormalTok{(test}\SpecialCharTok{$}\NormalTok{left, tree\_prob[,}\DecValTok{2}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Setting levels: control = 0, case = 1
+\end{verbatim}
+
+\begin{verbatim}
+## Setting direction: controls < cases
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tree\_auc}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Area under the curve: 0.9772
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# predict tree model using test dataset}
+\NormalTok{tree\_predict }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(fit,test,}\AttributeTok{type=}\StringTok{\textquotesingle{}class\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# cm for tree model}
+\NormalTok{tree\_cm }\OtherTok{\textless{}{-}} \FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(test}\SpecialCharTok{$}\NormalTok{left),tree\_predict, }\AttributeTok{mode =} \StringTok{"everything"}\NormalTok{)}
+\NormalTok{tree\_cm}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction    0    1
+##          0 2325   19
+##          1   37  410
+##                                              
+##                Accuracy : 0.9799             
+##                  95% CI : (0.974, 0.9848)    
+##     No Information Rate : 0.8463             
+##     P-Value [Acc > NIR] : <0.0000000000000002
+##                                              
+##                   Kappa : 0.9242             
+##                                              
+##  Mcnemar's Test P-Value : 0.0231             
+##                                              
+##             Sensitivity : 0.9843             
+##             Specificity : 0.9557             
+##          Pos Pred Value : 0.9919             
+##          Neg Pred Value : 0.9172             
+##               Precision : 0.9919             
+##                  Recall : 0.9843             
+##                      F1 : 0.9881             
+##              Prevalence : 0.8463             
+##          Detection Rate : 0.8330             
+##    Detection Prevalence : 0.8398             
+##       Balanced Accuracy : 0.9700             
+##                                              
+##        'Positive' Class : 0                  
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# improve the model by tuning it}
+\NormalTok{control }\OtherTok{\textless{}{-}} \FunctionTok{rpart.control}\NormalTok{(}\AttributeTok{xval=}\DecValTok{4}\NormalTok{, }\AttributeTok{minsplit =} \DecValTok{2}\NormalTok{,}
+                         \AttributeTok{minbucket =} \FunctionTok{round}\NormalTok{(}\DecValTok{6} \SpecialCharTok{/} \DecValTok{3}\NormalTok{),}
+                         \AttributeTok{maxdepth =} \DecValTok{4}\NormalTok{,}
+                         \AttributeTok{cp =} \DecValTok{0}\NormalTok{)}
+\NormalTok{tune\_fit }\OtherTok{\textless{}{-}} \FunctionTok{rpart}\NormalTok{(left}\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data =}\NormalTok{ train, }\AttributeTok{method=}\StringTok{"class"}\NormalTok{, }\AttributeTok{control =}\NormalTok{ control)}
+
+\CommentTok{\# compute auc for tunned tree model on test dataset}
+\NormalTok{tree\_prob2 }\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(tune\_fit, test, }\AttributeTok{type =} \StringTok{\textquotesingle{}prob\textquotesingle{}}\NormalTok{)}
+\NormalTok{tree\_auc2 }\OtherTok{\textless{}{-}} \FunctionTok{auc}\NormalTok{(test}\SpecialCharTok{$}\NormalTok{left, tree\_prob2[,}\DecValTok{2}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Setting levels: control = 0, case = 1
+\end{verbatim}
+
+\begin{verbatim}
+## Setting direction: controls < cases
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tree\_auc2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Area under the curve: 0.9776
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# compute cm for tunned tree model}
+\NormalTok{tree\_predict2 }\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(tune\_fit, test, }\AttributeTok{type =} \StringTok{\textquotesingle{}class\textquotesingle{}}\NormalTok{)}
+\NormalTok{tree\_cm2 }\OtherTok{\textless{}{-}} \FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(test}\SpecialCharTok{$}\NormalTok{left),tree\_predict2, }\AttributeTok{mode =} \StringTok{"everything"}\NormalTok{)}
+\NormalTok{tree\_cm2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction    0    1
+##          0 2325   19
+##          1   34  413
+##                                               
+##                Accuracy : 0.981               
+##                  95% CI : (0.9752, 0.9857)    
+##     No Information Rate : 0.8452              
+##     P-Value [Acc > NIR] : < 0.0000000000000002
+##                                               
+##                   Kappa : 0.9284              
+##                                               
+##  Mcnemar's Test P-Value : 0.05447             
+##                                               
+##             Sensitivity : 0.9856              
+##             Specificity : 0.9560              
+##          Pos Pred Value : 0.9919              
+##          Neg Pred Value : 0.9239              
+##               Precision : 0.9919              
+##                  Recall : 0.9856              
+##                      F1 : 0.9887              
+##              Prevalence : 0.8452              
+##          Detection Rate : 0.8330              
+##    Detection Prevalence : 0.8398              
+##       Balanced Accuracy : 0.9708              
+##                                               
+##        'Positive' Class : 0                   
+## 
+\end{verbatim}
+
+\section{random forest model}\label{random-forest-model}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Set seed for reproducibility}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
+
+\DocumentationTok{\#\# Split the data so that we use 75\% of it for training}
+\NormalTok{train\_index }\OtherTok{\textless{}{-}} \FunctionTok{createDataPartition}\NormalTok{(}\AttributeTok{y=}\NormalTok{df\_logreg}\SpecialCharTok{$}\NormalTok{left, }\AttributeTok{p=}\FloatTok{0.75}\NormalTok{, }\AttributeTok{list=}\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{repeat\_cv }\OtherTok{\textless{}{-}} \FunctionTok{trainControl}\NormalTok{(}\AttributeTok{method=}\StringTok{\textquotesingle{}repeatedcv\textquotesingle{}}\NormalTok{, }\AttributeTok{number=}\DecValTok{4}\NormalTok{,}\AttributeTok{repeats=}\DecValTok{4}\NormalTok{,}\AttributeTok{classProbs=}\NormalTok{T)}
+
+\DocumentationTok{\#\# Subset the data}
+\NormalTok{training\_set }\OtherTok{\textless{}{-}}\NormalTok{ df\_logreg[train\_index, ]}
+\NormalTok{testing\_set }\OtherTok{\textless{}{-}}\NormalTok{ df\_logreg[}\SpecialCharTok{{-}}\NormalTok{train\_index, ]}
+
+\NormalTok{training\_set}\SpecialCharTok{$}\NormalTok{left }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(training\_set}\SpecialCharTok{$}\NormalTok{left)}
+\NormalTok{training\_set}\SpecialCharTok{$}\NormalTok{left }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(training\_set}\SpecialCharTok{$}\NormalTok{left}\SpecialCharTok{==}\StringTok{"1"}\NormalTok{,}\StringTok{"yes"}\NormalTok{,}\StringTok{"no"}\NormalTok{)}
+
+\DocumentationTok{\#\# Train a random forest model}
+\NormalTok{forest }\OtherTok{\textless{}{-}} \FunctionTok{train}\NormalTok{(left}\SpecialCharTok{\textasciitilde{}}\NormalTok{., }
+  \AttributeTok{data=}\NormalTok{training\_set, }
+  \AttributeTok{method=}\StringTok{\textquotesingle{}rf\textquotesingle{}}\NormalTok{, }
+  \AttributeTok{trControl=}\NormalTok{repeat\_cv,}
+  \AttributeTok{metric=}\StringTok{\textquotesingle{}AUC\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in train.default(x, y, weights = w, ...): The metric "AUC" was not in
+## the result set. Accuracy will be used instead.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Print out the details about the model}
+\NormalTok{forest}\SpecialCharTok{$}\NormalTok{finalModel}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+##  randomForest(x = x, y = y, mtry = param$mtry) 
+##                Type of random forest: classification
+##                      Number of trees: 500
+## No. of variables tried at each split: 10
+## 
+##         OOB estimate of  error rate: 1.53%
+## Confusion matrix:
+##       no  yes class.error
+## no  6929   12 0.001728858
+## yes  116 1319 0.080836237
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# compute roc score}
+\NormalTok{forest\_prob }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(forest, testing\_set, }\AttributeTok{type =} \StringTok{"prob"}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(forest\_prob)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       no   yes
+## 6  0.000 1.000
+## 14 0.000 1.000
+## 17 0.016 0.984
+## 20 0.000 1.000
+## 21 0.000 1.000
+## 28 0.002 0.998
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{forest\_auc }\OtherTok{\textless{}{-}} \FunctionTok{auc}\NormalTok{(testing\_set}\SpecialCharTok{$}\NormalTok{left,forest\_prob[,}\DecValTok{2}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Setting levels: control = 0, case = 1
+\end{verbatim}
+
+\begin{verbatim}
+## Setting direction: controls < cases
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{forest\_auc}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Area under the curve: 0.9824
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Generate predictions for cm}
+\NormalTok{y\_hats }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(}\AttributeTok{object=}\NormalTok{forest,  }\AttributeTok{newdata=}\NormalTok{testing\_set[, }\SpecialCharTok{{-}}\DecValTok{7}\NormalTok{])}
+\FunctionTok{head}\NormalTok{(y\_hats)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] yes yes yes yes yes yes
+## Levels: no yes
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{testing\_set}\SpecialCharTok{$}\NormalTok{left }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(testing\_set}\SpecialCharTok{$}\NormalTok{left}\SpecialCharTok{==}\StringTok{"1"}\NormalTok{,}\StringTok{"yes"}\NormalTok{,}\StringTok{"no"}\NormalTok{)}
+\NormalTok{forest\_cm }\OtherTok{\textless{}{-}} \FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(testing\_set}\SpecialCharTok{$}\NormalTok{left),y\_hats,}\AttributeTok{mode=}\StringTok{\textquotesingle{}everything\textquotesingle{}}\NormalTok{)}
+\NormalTok{forest\_cm}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   no  yes
+##        no  2341    3
+##        yes   33  414
+##                                                
+##                Accuracy : 0.9871               
+##                  95% CI : (0.9822, 0.991)      
+##     No Information Rate : 0.8506               
+##     P-Value [Acc > NIR] : < 0.00000000000000022
+##                                                
+##                   Kappa : 0.9507               
+##                                                
+##  Mcnemar's Test P-Value : 0.000001343          
+##                                                
+##             Sensitivity : 0.9861               
+##             Specificity : 0.9928               
+##          Pos Pred Value : 0.9987               
+##          Neg Pred Value : 0.9262               
+##               Precision : 0.9987               
+##                  Recall : 0.9861               
+##                      F1 : 0.9924               
+##              Prevalence : 0.8506               
+##          Detection Rate : 0.8388               
+##    Detection Prevalence : 0.8398               
+##       Balanced Accuracy : 0.9895               
+##                                                
+##        'Positive' Class : no                   
+## 
+\end{verbatim}
+
+\section{Feature Engineering}\label{feature-engineering}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# create new feature (overworked)}
+\NormalTok{df3 }\OtherTok{\textless{}{-}}\NormalTok{ df\_enco}
+\NormalTok{df3 }\OtherTok{\textless{}{-}}\NormalTok{ df3 }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{mutate}\NormalTok{(}\AttributeTok{overworked =}\NormalTok{ df3}\SpecialCharTok{$}\NormalTok{average\_monthly\_hours)}
+\NormalTok{df3}\SpecialCharTok{$}\NormalTok{overworked }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(df3}\SpecialCharTok{$}\NormalTok{overworked}\SpecialCharTok{\textgreater{}}\DecValTok{175}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+
+\CommentTok{\# drop unuse columns}
+\NormalTok{df3}\SpecialCharTok{$}\NormalTok{average\_monthly\_hours }\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\NormalTok{df3}\SpecialCharTok{$}\NormalTok{satisfaction\_level}\OtherTok{\textless{}{-}} \ConstantTok{NULL}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# round 2 tree base model }
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
+
+\NormalTok{indexset2 }\OtherTok{\textless{}{-}} \FunctionTok{createDataPartition}\NormalTok{(df3}\SpecialCharTok{$}\NormalTok{left,}\AttributeTok{p =} \FloatTok{0.75}\NormalTok{,}\AttributeTok{list =}\NormalTok{ F)}
+\NormalTok{train2 }\OtherTok{\textless{}{-}}\NormalTok{ df3[indexset2,]}
+\NormalTok{test2 }\OtherTok{\textless{}{-}}\NormalTok{ df3[}\SpecialCharTok{{-}}\NormalTok{indexset2,]}
+
+
+\NormalTok{tune\_fit2 }\OtherTok{\textless{}{-}} \FunctionTok{rpart}\NormalTok{(left}\SpecialCharTok{\textasciitilde{}}\NormalTok{., }\AttributeTok{data =}\NormalTok{ train2, }\AttributeTok{method=}\StringTok{"class"}\NormalTok{, }\AttributeTok{control =}\NormalTok{ control)}
+
+\NormalTok{tree\_prob3 }\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(tune\_fit2, test2, }\AttributeTok{type =} \StringTok{\textquotesingle{}prob\textquotesingle{}}\NormalTok{)}
+\NormalTok{tree\_auc3 }\OtherTok{\textless{}{-}} \FunctionTok{auc}\NormalTok{(test2}\SpecialCharTok{$}\NormalTok{left, tree\_prob3[,}\DecValTok{2}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Setting levels: control = 0, case = 1
+\end{verbatim}
+
+\begin{verbatim}
+## Setting direction: controls < cases
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tree\_auc3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Area under the curve: 0.9535
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tree\_predict3 }\OtherTok{\textless{}{-}}\FunctionTok{predict}\NormalTok{(tune\_fit2, test2, }\AttributeTok{type =} \StringTok{\textquotesingle{}class\textquotesingle{}}\NormalTok{)}
+\NormalTok{cm\_tree3 }\OtherTok{\textless{}{-}} \FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(test2}\SpecialCharTok{$}\NormalTok{left),tree\_predict3, }\AttributeTok{mode =} \StringTok{"everything"}\NormalTok{)}
+\NormalTok{cm\_tree3}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction    0    1
+##          0 2403  106
+##          1   81  407
+##                                               
+##                Accuracy : 0.9376              
+##                  95% CI : (0.9283, 0.946)     
+##     No Information Rate : 0.8288              
+##     P-Value [Acc > NIR] : < 0.0000000000000002
+##                                               
+##                   Kappa : 0.7758              
+##                                               
+##  Mcnemar's Test P-Value : 0.07925             
+##                                               
+##             Sensitivity : 0.9674              
+##             Specificity : 0.7934              
+##          Pos Pred Value : 0.9578              
+##          Neg Pred Value : 0.8340              
+##               Precision : 0.9578              
+##                  Recall : 0.9674              
+##                      F1 : 0.9625              
+##              Prevalence : 0.8288              
+##          Detection Rate : 0.8018              
+##    Detection Prevalence : 0.8372              
+##       Balanced Accuracy : 0.8804              
+##                                               
+##        'Positive' Class : 0                   
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# random forest round 2}
+\DocumentationTok{\#\# Set seed for reproducibility}
+\FunctionTok{set.seed}\NormalTok{(}\DecValTok{42}\NormalTok{)}
+
+\DocumentationTok{\#\# Split the data so that we use 75\% of it for training}
+\NormalTok{train\_index2 }\OtherTok{\textless{}{-}} \FunctionTok{createDataPartition}\NormalTok{(}\AttributeTok{y=}\NormalTok{df3}\SpecialCharTok{$}\NormalTok{left, }\AttributeTok{p=}\FloatTok{0.75}\NormalTok{, }\AttributeTok{list=}\ConstantTok{FALSE}\NormalTok{)}
+\NormalTok{repeat\_cv }\OtherTok{\textless{}{-}} \FunctionTok{trainControl}\NormalTok{(}\AttributeTok{method=}\StringTok{\textquotesingle{}repeatedcv\textquotesingle{}}\NormalTok{, }\AttributeTok{number=}\DecValTok{4}\NormalTok{,}\AttributeTok{repeats=}\DecValTok{4}\NormalTok{,}\AttributeTok{classProbs=}\NormalTok{T)}
+
+\DocumentationTok{\#\# Subset the data}
+\NormalTok{training\_set2 }\OtherTok{\textless{}{-}}\NormalTok{ df3[train\_index2, ]}
+\NormalTok{testing\_set2 }\OtherTok{\textless{}{-}}\NormalTok{ df3[}\SpecialCharTok{{-}}\NormalTok{train\_index2, ]}
+
+\NormalTok{training\_set2}\SpecialCharTok{$}\NormalTok{left }\OtherTok{\textless{}{-}} \FunctionTok{as.factor}\NormalTok{(training\_set2}\SpecialCharTok{$}\NormalTok{left)}
+\NormalTok{training\_set2}\SpecialCharTok{$}\NormalTok{left }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(training\_set2}\SpecialCharTok{$}\NormalTok{left}\SpecialCharTok{==}\StringTok{"1"}\NormalTok{,}\StringTok{"yes"}\NormalTok{,}\StringTok{"no"}\NormalTok{)}
+
+\DocumentationTok{\#\# Train a random forest model}
+\NormalTok{forest2 }\OtherTok{\textless{}{-}} \FunctionTok{train}\NormalTok{(left}\SpecialCharTok{\textasciitilde{}}\NormalTok{., }
+  \AttributeTok{data=}\NormalTok{training\_set2, }
+  \AttributeTok{method=}\StringTok{\textquotesingle{}rf\textquotesingle{}}\NormalTok{, }
+  \AttributeTok{trControl=}\NormalTok{repeat\_cv,}
+  \AttributeTok{metric=}\StringTok{\textquotesingle{}AUC\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Warning in train.default(x, y, weights = w, ...): The metric "AUC" was not in
+## the result set. Accuracy will be used instead.
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Print out the details about the model}
+\NormalTok{forest2}\SpecialCharTok{$}\NormalTok{finalModel}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+##  randomForest(x = x, y = y, mtry = param$mtry) 
+##                Type of random forest: classification
+##                      Number of trees: 500
+## No. of variables tried at each split: 9
+## 
+##         OOB estimate of  error rate: 3.87%
+## Confusion matrix:
+##       no  yes class.error
+## no  7339  152  0.02029102
+## yes  196 1307  0.13040585
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# compute roc score}
+\NormalTok{forest\_prob2 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(forest2, testing\_set2, }\AttributeTok{type =} \StringTok{"prob"}\NormalTok{)}
+\FunctionTok{head}\NormalTok{(forest\_prob2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##       no   yes
+## 6  0.012 0.988
+## 10 0.000 1.000
+## 12 0.000 1.000
+## 17 0.000 1.000
+## 20 0.046 0.954
+## 23 0.054 0.946
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{forest\_auc2 }\OtherTok{\textless{}{-}} \FunctionTok{auc}\NormalTok{(testing\_set2}\SpecialCharTok{$}\NormalTok{left,forest\_prob2[,}\DecValTok{2}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Setting levels: control = 0, case = 1
+\end{verbatim}
+
+\begin{verbatim}
+## Setting direction: controls < cases
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{forest\_auc2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Area under the curve: 0.9654
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DocumentationTok{\#\# Generate predictions for cm}
+\NormalTok{y\_hats2 }\OtherTok{\textless{}{-}} \FunctionTok{predict}\NormalTok{(}\AttributeTok{object=}\NormalTok{forest2,  }\AttributeTok{newdata=}\NormalTok{testing\_set2[, }\SpecialCharTok{{-}}\DecValTok{5}\NormalTok{])}
+\FunctionTok{head}\NormalTok{(y\_hats2)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] yes yes yes yes yes yes
+## Levels: no yes
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{testing\_set2}\SpecialCharTok{$}\NormalTok{left }\OtherTok{\textless{}{-}} \FunctionTok{ifelse}\NormalTok{(testing\_set2}\SpecialCharTok{$}\NormalTok{left}\SpecialCharTok{==}\StringTok{"1"}\NormalTok{,}\StringTok{"yes"}\NormalTok{,}\StringTok{"no"}\NormalTok{)}
+\NormalTok{forest\_cm2 }\OtherTok{\textless{}{-}} \FunctionTok{confusionMatrix}\NormalTok{(}\FunctionTok{as.factor}\NormalTok{(testing\_set2}\SpecialCharTok{$}\NormalTok{left),y\_hats2,}\AttributeTok{mode=}\StringTok{\textquotesingle{}everything\textquotesingle{}}\NormalTok{)}
+\NormalTok{forest\_cm2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction   no  yes
+##        no  2472   37
+##        yes   53  435
+##                                              
+##                Accuracy : 0.97               
+##                  95% CI : (0.9632, 0.9758)   
+##     No Information Rate : 0.8425             
+##     P-Value [Acc > NIR] : <0.0000000000000002
+##                                              
+##                   Kappa : 0.8884             
+##                                              
+##  Mcnemar's Test P-Value : 0.1138             
+##                                              
+##             Sensitivity : 0.9790             
+##             Specificity : 0.9216             
+##          Pos Pred Value : 0.9853             
+##          Neg Pred Value : 0.8914             
+##               Precision : 0.9853             
+##                  Recall : 0.9790             
+##                      F1 : 0.9821             
+##              Prevalence : 0.8425             
+##          Detection Rate : 0.8248             
+##    Detection Prevalence : 0.8372             
+##       Balanced Accuracy : 0.9503             
+##                                              
+##        'Positive' Class : no                 
+## 
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# plot tree model}
+\FunctionTok{rpart.plot}\NormalTok{(tune\_fit2, }\AttributeTok{extra =} \DecValTok{106}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{salifort_rmarkdown_files/figure-latex/unnamed-chunk-36-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tree2\_vip }\OtherTok{\textless{}{-}} \FunctionTok{vip}\NormalTok{(tune\_fit2)}
+\NormalTok{tree2\_vip}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{salifort_rmarkdown_files/figure-latex/unnamed-chunk-37-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{forest2\_vip }\OtherTok{\textless{}{-}} \FunctionTok{vip}\NormalTok{(forest2)}
+\NormalTok{forest2\_vip}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{salifort_rmarkdown_files/figure-latex/unnamed-chunk-38-1.pdf}
+
+\section{summary}\label{summary}
+
+Logistic Regression
+
+The logistic regression model achieved precision of 87\%, recall of
+94\%, f1-score of 90\% (all weighted averages), and accuracy of 83\%, on
+the test set.
+
+Tree-based Machine Learning
+
+After conducting feature engineering, the decision tree model achieved
+AUC of 95.4\%, precision of 95.8\%, recall of 96.7\%, f1-score of
+96.3\%, and accuracy of 93.7\%, on the test set. the random forest model
+achieved AUC of 96.5\%, precision of 98.5\%, recall of 97.9\%, f1-score
+of 98.2\%, and accuracy of 97.0\%, on the test set.The random forest
+modestly outperformed the decision tree model.
+
+\section{Conclusion, Recommendations, Next
+Steps}\label{conclusion-recommendations-next-steps}
+
+The models and the feature importances extracted from the models confirm
+that employees at the company are overworked.
+
+To retain employees, the following recommendations could be presented to
+the stakeholders:
+
+\begin{itemize}
+\tightlist
+\item
+  Cap the number of projects that employees can work on.
+\item
+  Consider promoting employees who have been with the company for
+  atleast four years, or conduct further investigation about why
+  four-year tenured employees are so dissatisfied.
+\item
+  Either reward employees for working longer hours, or don't require
+  them to do so.
+\item
+  If employees aren't familiar with the company's overtime pay policies,
+  inform them about this. If the expectations around workload and time
+  off aren't explicit, make them clear.
+\item
+  Hold company-wide and within-team discussions to understand and
+  address the company work culture, across the board and in specific
+  contexts.
+\item
+  High evaluation scores should not be reserved for employees who work
+  200+ hours per month. Consider a proportionate scale for rewarding
+  employees who contribute more/put in more effort.
+\end{itemize}
+
+\textbf{Next Steps}
+
+It may be justified to still have some concern about data leakage. It
+could be prudent to consider how predictions change when
+\texttt{last\_evaluation} is removed from the data. It's possible that
+evaluations aren't performed very frequently, in which case it would be
+useful to be able to predict employee retention without this feature.
+It's also possible that the evaluation score determines whether an
+employee leaves or stays, in which case it could be useful to pivot and
+try to predict performance score. The same could be said for
+satisfaction score.
+
+For another project, you could try building a K-means model on this data
+and analyzing the clusters. This may yield valuable insight.
+
+\end{document}
